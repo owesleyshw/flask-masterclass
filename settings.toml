@@ -1,0 +1,8 @@
+[default]
+EXTENSIONS = ['mvc_flask:FlaskMVC']
+
+[production]
+
+[development]
+
+[testing]
