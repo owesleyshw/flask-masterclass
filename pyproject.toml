@@ -9,6 +9,7 @@ python = "^3.8"
 dynaconf = "^3.1.7"
 urllib3 = "^1.26.8"
 mvc-flask = "^2.3.1"
+Flask-SQLAlchemy = "^2.5.1"
 
 [tool.poetry.dev-dependencies]
 ward = "^0.65.0-beta.0"

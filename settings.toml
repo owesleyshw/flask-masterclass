@@ -1,8 +1,12 @@
 [default]
-EXTENSIONS = ['mvc_flask:FlaskMVC']
+SQLALCHEMY_TRACK_MODIFICATIONS = false
+
+EXTENSIONS = ['mvc_flask:FlaskMVC', 'app.ext:init_app']
 
 [production]
 
 [development]
+SQLALCHEMY_DATABASE_URI = 'sqlite:///development.sqlite'
 
 [testing]
+SQLALCHEMY_DATABASE_URI = 'sqlite:///'
