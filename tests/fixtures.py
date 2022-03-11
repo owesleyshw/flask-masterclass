@@ -14,6 +14,6 @@ def browser_client():
     with app.test_client():
         db.create_all()
         yield Browser("flask", app=app)
-
+    
     db.session.remove()
     db.drop_all()

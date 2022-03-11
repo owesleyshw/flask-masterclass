@@ -1,7 +1,11 @@
 [default]
+SECRET_KEY="JUNIORPXLG"
 SQLALCHEMY_TRACK_MODIFICATIONS = false
 
-EXTENSIONS = ['mvc_flask:FlaskMVC', 'app.ext:init_app']
+EXTENSIONS = [
+    'mvc_flask:FlaskMVC', 
+    'app.ext:init_app'
+]
 
 [production]
 
@@ -9,4 +13,4 @@ EXTENSIONS = ['mvc_flask:FlaskMVC', 'app.ext:init_app']
 SQLALCHEMY_DATABASE_URI = 'sqlite:///development.sqlite'
 
 [testing]
-SQLALCHEMY_DATABASE_URI = 'sqlite:///'
+SQLALCHEMY_DATABASE_URI = 'sqlite:///development.sqlite'
