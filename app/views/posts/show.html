@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Blog do Wesley</title>
+</head>
+
+<body>
+  <dl>
+    <dt>{{ post.title }}</dt>
+    <dd>{{ post.content }}</dd>
+    <dd>{{ 'Publicado' if post.published else 'Rascunho' }}</dd>
+  </dl>
+</body>
+
+</html>

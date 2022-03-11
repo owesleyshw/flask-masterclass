@@ -1,9 +1,12 @@
 from flask import url_for
 from ward import test
+from faker import Faker
+
 from tests.fixtures import browser_client
 from app.model.post import Post
 from app.ext import db
 
+fake = Faker()
 
 @test("Usuário visita página inicial com sucesso")
 def _(browser=browser_client):
@@ -39,3 +42,17 @@ def _(browser=browser_client):
 
     assert browser.is_text_present("Post 1")
     assert browser.is_text_not_present("Post 2")
+
+@test("Usuário ver detalhes sobre o post")
+def _(browser=browser_client):
+    p = Post(title=fake.name(), content=fake.text(), published=True)
+    db.session.add(p)
+    db.session.commit()
+    
+    browser.visit(url_for("home.index"))
+    post = browser.find_by_id(f'post-{p.id}')
+    post.click()
+
+    assert browser.is_text_present(p.title)
+    assert browser.is_text_present(p.content)
+    assert browser.is_text_present('Publicado')
