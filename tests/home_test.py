@@ -1,12 +1,14 @@
+from app.ext import db
+from app.model.post import Post
+from faker import Faker
 from flask import url_for
 from ward import test
-from faker import Faker
 
+from tests.factories.post import PostFactory
 from tests.fixtures import browser_client
-from app.model.post import Post
-from app.ext import db
 
 fake = Faker()
+
 
 @test("Usuário visita página inicial com sucesso")
 def _(browser=browser_client):
@@ -15,44 +17,34 @@ def _(browser=browser_client):
     assert browser.status_code == 200
     assert browser.is_text_present("Home Page")
 
+
 @test("Usuário ver posts")
 def _(browser=browser_client):
-    p1 = Post(title="Post 1", content="Conteúdo de exemplo do post 1", published=True)
-    p2 = Post(title="Post 2", content="Conteúdo de exemplo do post 2", published=True)
-    
-    db.session.add(p1)
-    db.session.add(p2)
-    db.session.commit()
-    
+    posts = PostFactory.create_batch(2)
+
     browser.visit(url_for("home.index"))
 
-    assert browser.is_text_present("Post 1")
-    assert browser.is_text_present("Post 2")
+    for post in posts:
+        assert browser.is_text_present(post.title)
+
 
 @test("Usuário ver posts ativos")
 def _(browser=browser_client):
-    p1 = Post(title="Post 1", content="Conteúdo de exemplo do post 1", published=True)
-    p2 = Post(title="Post 2", content="Conteúdo de exemplo do post 2", published=False)
-    
-    db.session.add(p1)
-    db.session.add(p2)
-    db.session.commit()
-    
+    posts = PostFactory.create_batch(2)
+
     browser.visit(url_for("home.index"))
 
-    assert browser.is_text_present("Post 1")
-    assert browser.is_text_not_present("Post 2")
+    for post in posts:
+        assert browser.is_text_present(post.title)
+
 
 @test("Usuário ver detalhes sobre o post")
 def _(browser=browser_client):
-    p = Post(title=fake.name(), content=fake.text(), published=True)
-    db.session.add(p)
-    db.session.commit()
-    
-    browser.visit(url_for("home.index"))
-    post = browser.find_by_id(f'post-{p.id}')
-    post.click()
+    post = PostFactory.create()
 
-    assert browser.is_text_present(p.title)
-    assert browser.is_text_present(p.content)
-    assert browser.is_text_present('Publicado')
+    browser.visit(url_for("home.index"))
+    browser.find_by_id(f"post-{post.id}").click()
+
+    assert browser.is_text_present(post.title)
+    assert browser.is_text_present(post.content)
+    assert browser.is_text_present("Publicado")

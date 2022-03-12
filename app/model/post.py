@@ -1,5 +1,6 @@
 from app.ext import db
 
+
 class Post(db.Model):
     __tablename__ = "posts"
 
