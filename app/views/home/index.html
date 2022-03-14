@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html >
+{% extends 'layouts/application.html' %}
 
-<head>
-  <title>Blog do Wesley</title>
-</head>
-
-<body>
+{% block content %}
   <h1>Home Page</h1>
 
   {% for post in posts %}
@@ -15,6 +10,4 @@
     </a>
   </p>
   {% endfor %}
-</body>
-
-</html>
+{% endblock %}

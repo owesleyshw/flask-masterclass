@@ -1,16 +1,10 @@
-<!DOCTYPE html>
-<html>
+{% extends 'layouts/application.html' %}
 
-<head>
-  <title>Blog do Wesley</title>
-</head>
-
-<body>
+{% block content %}
   <dl>
     <dt>{{ post.title }}</dt>
     <dd>{{ post.content }}</dd>
     <dd>{{ 'Publicado' if post.published else 'Rascunho' }}</dd>
+    <dd>{{ post.author.name }}</dd>
   </dl>
-</body>
-
-</html>
+{% endblock %}
