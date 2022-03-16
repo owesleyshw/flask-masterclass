@@ -30,3 +30,15 @@ def _(browser=browser_client):
     assert browser.is_text_present(post.content)
     assert browser.is_text_present("Publicado")
     assert browser.is_text_present(post.author.name)
+
+
+@test("Usuário deleta um post")
+def _(browser=browser_client):
+    post = PostFactory.create()
+
+    browser.visit(url_for("posts.show", id=post.id))
+    browser.find_by_value("Excluir").click()
+
+    assert browser.url == "http://localhost/"
+    assert browser.is_text_present("Home Page")
+    assert browser.is_text_not_present(post.title)

@@ -6,7 +6,7 @@
   {% for post in posts %}
   <p>
     <a id="post-{{post.id}}" href="{{ url_for('posts.show', id=post.id) }}">
-      {{ post.title }}
+      {{ post.title }} <br />
     </a>
   </p>
   {% endfor %}

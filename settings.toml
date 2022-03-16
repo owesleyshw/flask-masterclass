@@ -1,5 +1,4 @@
 [default]
-SECRET_KEY="JUNIORPXLG"
 SQLALCHEMY_TRACK_MODIFICATIONS = false
 
 EXTENSIONS = [
@@ -10,7 +9,9 @@ EXTENSIONS = [
 [production]
 
 [development]
+SECRET_KEY="JUNIORPXLG"
 SQLALCHEMY_DATABASE_URI = 'sqlite:///development.sqlite'
 
 [testing]
+WTF_CSRF_ENABLED = false
 SQLALCHEMY_DATABASE_URI = 'sqlite:///'

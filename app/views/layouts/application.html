@@ -7,6 +7,16 @@
     <title>Blog do Wesley</title>
 </head>
 <body>
+  <header>
+    <nav>
+      <ul>
+        <li>
+          <a href="{{ url_for('posts.new') }}">Criar novo post</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
   {% block content %} {% endblock %}
+  {% block javascript %} {% endblock %}
 </body>
 </html>
