@@ -13,3 +13,5 @@ class UserFactory(SQLAlchemyModelFactory):
         sqlalchemy_session = db.session
 
     name = fake.name()
+    email = fake.email()
+    password = "123456789"

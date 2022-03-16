@@ -18,7 +18,7 @@ def _(browser=browser_client):
 
 @test("Usuário ver posts")
 def _(browser=browser_client):
-    posts = PostFactory.create_batch(2)
+    posts = PostFactory.create_batch(1)
 
     browser.visit(url_for("home.index"))
 
@@ -28,7 +28,7 @@ def _(browser=browser_client):
 
 @test("Usuário ver posts ativos")
 def _(browser=browser_client):
-    posts = PostFactory.create_batch(2)
+    posts = PostFactory.create_batch(1)
 
     browser.visit(url_for("home.index"))
 

@@ -4,4 +4,4 @@
 
 migrations/
 
-*.sqlite
+app/development.sqlite
