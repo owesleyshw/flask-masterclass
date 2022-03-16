@@ -7,6 +7,8 @@ from wtforms.fields import (
     BooleanField,
     SelectField,
     SubmitField,
+    EmailField,
+    PasswordField
 )
 
 
@@ -22,3 +24,9 @@ class PostForm(FlaskForm):
         self.authors.choices = [
             (user.id, user.name) for user in User.query.all()
         ]
+
+class AuthRegisterForm(FlaskForm):
+    name = StringField("Nome")
+    email = EmailField("E-mail")
+    password = PasswordField("Senha")
+    submit = SubmitField("Registrar")

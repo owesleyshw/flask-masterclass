@@ -17,10 +17,8 @@
 {% block javascript %}
   <script>
     const form = document.getElementById('form');
-    
     form.onsubmit = async function (event) {
       event.preventDefault();
-    
       await fetch("{{ url_for('posts.delete', id=post.id) }}", {method: 'delete'})
       window.location.href = "{{ url_for('home.index') }}"
     };
