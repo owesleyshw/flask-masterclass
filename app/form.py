@@ -26,6 +26,12 @@ class PostForm(FlaskForm):
         ]
 
 
+class AuthLoginForm(FlaskForm):
+    email = EmailField("E-mail")
+    password = PasswordField("Senha")
+    submit = SubmitField("Entrar")
+
+
 class AuthRegisterForm(FlaskForm):
     name = StringField("Nome")
     email = EmailField("E-mail")

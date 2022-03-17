@@ -9,12 +9,22 @@
 <body>
   <header>
     <nav>
+      {% if current_user.is_authenticated %}
+      <ul>
+        <li>
+          {{ current_user.name }} {{ current_user.email }}
+        </li>
+      </ul>
+      {% endif %}
       <ul>
         <li>
           <a href="{{ url_for('posts.new') }}">Criar novo post</a>
         </li>
         <li>
           <a href="{{ url_for('auth.register') }}">Registrar</a>
+        </li>
+        <li>
+          <a href="{{ url_for('auth.login') }}">Entrar</a>
         </li>
       </ul>
     </nav>
