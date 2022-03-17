@@ -1,0 +1,39 @@
+name: masterclass
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.9]
+    
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: Set up Python ${{ matrix.python-version }}
+    
+    - name: Install poetry
+      uses: Gr1N/setup-poetry@v4
+      
+    - name: Disables creation of virtualenvs
+      run: poetry config virtualenvs.create false
+      
+    - name: Install dependencies
+      run: poetry install
+      
+    - name: run lint with black
+      run: |
+        make check
+    
+    - name: run test with ward
+      run: |
+        make test
