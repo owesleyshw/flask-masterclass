@@ -15,12 +15,16 @@ class AuthController:
         if form.validate_on_submit():
             user = User.query.filter_by(email=form.email.data).first()
 
-            if not user or not check_password_hash(user.password, form.password.data):
+            if not user or not check_password_hash(
+                user.password, form.password.data
+            ):
                 flash("E-mail ou senha inválidos")
                 return redirect(url_for("auth.login"))
 
             login_user(user)
             return redirect(url_for("home.index"))
+
+        return view("auth/login.html", form=form)
 
     def register(self, view, request):
         return view("auth/register.html", form=AuthRegisterForm())
@@ -37,3 +41,5 @@ class AuthController:
             db.session.commit()
             flash("Registro realizado com sucesso!")
             return redirect(url_for("auth.register"))
+
+        return view("auth/register.html", form=form)

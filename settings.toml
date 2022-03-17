@@ -1,5 +1,5 @@
 [default]
-SECRET_KEY="JUNIORPXLG"
+SECRET_KEY = "@jinja {{env.SECRET_KEY}}"
 SQLALCHEMY_TRACK_MODIFICATIONS = false
 
 EXTENSIONS = [
@@ -8,10 +8,11 @@ EXTENSIONS = [
 ]
 
 [production]
+SQLALCHEMY_DATABASE_URI = "@jinja {{env.DB_URI}}"
 
 [development]
-SQLALCHEMY_DATABASE_URI = 'sqlite:///development.sqlite'
+SQLALCHEMY_DATABASE_URI = "@jinja {{env.DB_DEV_URI}}"
 
 [testing]
 WTF_CSRF_ENABLED = false
-SQLALCHEMY_DATABASE_URI = 'sqlite:///'
+SQLALCHEMY_DATABASE_URI = "@jinja {{env.DB_TEST_URI}}"

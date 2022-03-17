@@ -2,6 +2,7 @@ from app.ext import db
 from app.form import PostForm
 from app.model.post import Post
 from flask import redirect, url_for
+from flask_login import login_required
 
 
 class PostsController:
@@ -9,6 +10,7 @@ class PostsController:
         post = Post.query.get(id)
         return view("posts/show.html", post=post)
 
+    @login_required
     def new(self, view, request):
         form = PostForm()
         return view("posts/new.html", form=form)
